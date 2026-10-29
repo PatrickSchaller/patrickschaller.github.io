@@ -8,13 +8,17 @@ const html = await readFile(path.join(root, 'index.html'), 'utf8');
 const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
 assert.equal(ids.length, new Set(ids).size, 'HTML IDs must be unique');
 assert.equal((html.match(/<h1\b/g) || []).length, 1, 'Keep one descriptive main heading');
-for (const [, attribute, url] of html.matchAll(/\b(href|src)="([^"]+)"/g)) {
-  if (url.startsWith('#')) { assert(ids.includes(url.slice(1)), `Missing anchor ${url}`); continue; }
+for (const document of ['index.html', 'api/inventory/index.html']) {
+const content = await readFile(path.join(root, document), 'utf8');
+for (const [, attribute, url] of content.matchAll(/\b(href|src)="([^"]+)"/g)) {
+  const localIds = [...content.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  if (url.startsWith('#')) { assert(localIds.includes(url.slice(1)), `Missing anchor ${url}`); continue; }
   if (url.startsWith('https:') || url.startsWith('mailto:')) continue;
   assert(!url.includes(':'), `Unexpected URL protocol: ${url}`);
-  const resolved = path.resolve(root, url);
+  const resolved = path.resolve(root, path.dirname(document), url.endsWith('/') ? url + 'index.html' : url);
   assert(resolved.startsWith(root), `Asset outside site: ${url}`);
   assert((await stat(resolved)).isFile(), `Missing ${attribute}: ${url}`);
+}
 }
 for (const tag of html.matchAll(/<img\b[^>]*>/g)) {
   assert(/\balt="[^"]+"/.test(tag[0]), 'Project images need meaningful alt text');
@@ -27,4 +31,11 @@ for (const tag of html.matchAll(/<img\b[^>]*>/g)) {
 }
 assert(html.includes('mailto:patrick.r.schaller@gmail.com'), 'Keep the requested contact route');
 assert(!/https?:\/\/(?:localhost|127\.0\.0\.1)/i.test(html), 'Do not publish local demo links');
-process.stdout.write('Static links, anchors, image dimensions and contact route verified.\n');
+const contract = JSON.parse(await readFile(path.join(root, 'api/inventory/openapi.json'), 'utf8'));
+assert.equal(Object.keys(contract.paths).length, 5, 'The API reference must include all five routes');
+assert.equal(contract.paths['/api/receipts'].post.operationId, 'ReceiveStock');
+const responses = JSON.parse(await readFile(path.join(root, 'api/inventory/responses.json'), 'utf8'));
+assert.equal(responses.requests.length, 12, 'Publish the complete recorded walkthrough');
+const conflict = responses.requests.find(request => request.status === 409);
+assert(html.includes(conflict.response.detail), 'The portfolio example must match the recorded API response');
+process.stdout.write('Static links, anchors, image dimensions, contact route and API evidence verified.\n');

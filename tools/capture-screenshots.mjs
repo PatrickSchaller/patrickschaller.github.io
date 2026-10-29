@@ -13,4 +13,9 @@ try {
   await page.setViewportSize({ width: 390, height: 1000 });
   await page.evaluate(() => scrollTo(0, 0));
   await page.screenshot({ path: fileURLToPath(new URL('../docs/mobile.png', import.meta.url)) });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto('http://127.0.0.1:5100/api/inventory/');
+  await page.locator('#operations-Receiving-ReceiveStock .opblock-summary-control').waitFor();
+  await page.evaluate(() => scrollTo(0, 0));
+  await page.screenshot({ path: fileURLToPath(new URL('../docs/api-reference.png', import.meta.url)) });
 } finally { await browser.close(); }

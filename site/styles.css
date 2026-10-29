@@ -107,8 +107,8 @@ nav a:hover { text-decoration: underline; }
 .workflow-visual { background: #e8e3f0; transform: rotate(.4deg); }
 .project-visual img { border-radius: 4px; width: 100%; border: 1px solid #aebdce; }
 .project-visual figcaption { font-size: .73rem; color: #3d5368; margin-top: 11px; text-align: center; }
-.project-label { grid-template-columns: 1.06fr .94fr; }
-.project-label .project-copy { padding: 0 0 0 14px; }
+.project-workflow { grid-template-columns: 1.06fr .94fr; }
+.project-workflow .project-copy { padding: 0 0 0 14px; }
 .tech { display: flex; flex-wrap: wrap; gap: 7px; list-style: none; padding: 0; margin: 21px 0; }
 .tech li { background: #e8edf4; border: 1px solid #d0dae7; color: #354b61; border-radius: 5px; padding: 2px 8px; font-size: .73rem; }
 .project-links { display: flex; flex-wrap: wrap; gap: 12px 20px; font-size: .87rem; margin-bottom: 22px; }
@@ -198,9 +198,9 @@ details .project-scope { font-size: .8rem; }
   .work-section { padding-top: 24px; padding-bottom: 55px; }
   .section-intro { grid-template-columns: 1fr; gap: 22px; margin-bottom: 30px; }
   .section-intro>p { max-width: 53ch; }
-  .featured, .project-label { grid-template-columns: 1fr; gap: 28px; padding-top: 30px; margin-bottom: 25px; }
-  .project-copy, .project-label .project-copy { padding: 0; max-width: none; }
-  .project-label .project-copy { grid-row: 1; }
+  .featured, .project-workflow { grid-template-columns: 1fr; gap: 28px; padding-top: 30px; margin-bottom: 25px; }
+  .project-copy, .project-workflow .project-copy { padding: 0; max-width: none; }
+  .project-workflow .project-copy { grid-row: 1; }
   .project-visual { padding: 16px; width: 100%; transform: none; }
   h3 { font-size: 1.8rem; }
   .small-projects { grid-template-columns: 1fr; gap: 32px; margin-top: 10px; }
@@ -219,4 +219,38 @@ details .project-scope { font-size: .8rem; }
 @media (prefers-reduced-motion: reduce) {
   :root { scroll-behavior: auto; }
   .flow-tangle, .flow-tidy { transition: none; }
+}
+
+/* Capability links and a recorded API example keep the evidence close to the work. */
+.capability-index { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-block: 1px solid #c7d2df; padding-block: 23px; margin-bottom: 58px; }
+.capability-index a { display: flex; align-items: center; gap: 15px; padding: 5px 24px; text-decoration: none; }
+.capability-index a:first-child { padding-left: 0; }
+.capability-index a + a { border-left: 1px solid #c7d2df; }
+.capability-index a:hover strong { text-decoration: underline; text-underline-offset: 5px; }
+.capability-index strong { display: block; font-family: Bricolage, sans-serif; font-size: 1.03rem; font-weight: 650; }
+.capability-index small { display: block; color: var(--muted); font-size: .76rem; margin-top: 3px; }
+.capability-symbol { font: 1.8rem Bricolage, sans-serif; color: var(--blue); white-space: nowrap; }
+.capability-index a > span:last-child { margin-left: auto; color: var(--blue); }
+.api-proof { display: grid; grid-template-columns: .8fr 1.2fr; gap: 55px; padding: 30px 34px; margin: -25px 0 58px; background: #e9eef7; border-left: 3px solid #829bcc; border-radius: 0 8px 8px 0; }
+.api-proof h3 { font-size: 1.8rem; }
+.api-proof p { color: var(--muted); font-size: .88rem; }
+.api-proof a { font-size: .84rem; color: var(--blue); }
+.api-proof-detail { min-width: 0; padding-top: 6px; }
+.receipt-outcomes { display: grid; grid-template-columns: repeat(3,1fr); list-style: none; gap: 20px; padding: 0; margin: 0 0 22px; }
+.receipt-outcomes strong { display: block; font: 1.5rem Bricolage,sans-serif; color: var(--green); }
+.receipt-outcomes strong span { display: block; font-size: .9rem; margin-block: 4px; color: var(--ink); }
+.receipt-outcomes small { display: block; font-size: .75rem; line-height: 1.5; color: var(--muted); }
+.receipt-outcomes li:last-child strong { color: var(--orange); }
+.api-proof pre { background: #203748; color: #e6eef7; padding: 18px; border-radius: 5px; white-space: pre-wrap; overflow-wrap: anywhere; font: .77rem/1.7 Consolas,monospace; }
+.api-proof details p { font-size: .76rem; }
+@media(max-width:1000px) { .capability-index a { gap: 10px; padding-inline: 16px; } .capability-index strong { font-size: .94rem; } .capability-symbol { font-size: 1.5rem; } .api-proof { gap: 30px; padding-inline: 25px; } }
+@media(max-width:740px) {
+  nav { gap: 18px; flex-wrap: wrap; }
+  .capability-index { grid-template-columns: 1fr; margin-bottom: 35px; padding-block: 8px; }
+  .capability-index a, .capability-index a:first-child { padding: 15px 0; }
+  .capability-index a + a { border-left: 0; border-top: 1px solid #d5dfea; }
+  .capability-symbol { width: 38px; }
+  .api-proof { grid-template-columns: 1fr; gap: 15px; margin: -10px 0 40px; padding: 24px 20px; }
+  .api-proof h3 br { display: none; }
+  .receipt-outcomes { gap: 12px; }
 }
