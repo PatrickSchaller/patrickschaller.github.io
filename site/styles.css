@@ -104,6 +104,7 @@ nav a:hover { text-decoration: underline; }
 .project-visual { margin: 0; padding: 22px; border-radius: 12px; overflow: hidden; min-width: 0; }
 .inventory-visual { background: #dfe7fa; transform: rotate(.7deg); }
 .label-visual { background: #dcece5; transform: rotate(-.7deg); }
+.workflow-visual { background: #e8e3f0; transform: rotate(.4deg); }
 .project-visual img { border-radius: 4px; width: 100%; border: 1px solid #aebdce; }
 .project-visual figcaption { font-size: .73rem; color: #3d5368; margin-top: 11px; text-align: center; }
 .project-label { grid-template-columns: 1.06fr .94fr; }

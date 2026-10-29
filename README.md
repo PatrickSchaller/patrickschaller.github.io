@@ -38,8 +38,8 @@ The workflow checks the site before publishing **only the `site/` folder** to Gi
 ## Content and assets
 
 - Contact: the email supplied for publication by Patrick. There is a `mailto:` link, not a message-collection form.
-- Four independent, AI-assisted example projects are linked to their source repositories. Their synthetic-data scope and live-AI limits remain visible.
-- Project screenshots come from the public Inventory Receiving and Label Review examples, using invented data. No private work screenshots or employer assets are used.
+- Five independent, AI-assisted example projects are linked to their source repositories. Their synthetic-data scope and live-AI limits remain visible.
+- Project screenshots come from the public Inventory Receiving, Label Review and Workflow Workbench examples, using invented data. No private work screenshots or employer assets are used.
 - The SVG workflow and monogram are original code-drawn artwork. The interaction is an illustration, not a working business-system integration.
 - [Bricolage Grotesque](https://github.com/google/fonts/tree/main/ofl/bricolagegrotesque) is self-hosted under its [SIL Open Font License](site/assets/bricolage-OFL.txt). Other text uses system fonts. Visitors do not request external fonts.
 - No personal photograph, unprovided career history, client endorsements or business outcome claims are included.

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('portfolio loads its assets and offers four clear project and contact routes', async ({ page }) => {
+test('portfolio loads its assets and offers five clear project and contact routes', async ({ page }) => {
   const problems = [];
   page.on('pageerror', error => problems.push(error.message));
   page.on('response', response => { if (!response.ok()) problems.push(`${response.status()} ${response.url()}`); });
@@ -8,7 +8,7 @@ test('portfolio loads its assets and offers four clear project and contact route
   await page.evaluate(() => document.fonts.ready);
   await expect(page).toHaveTitle(/Patrick Schaller/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Good software.Fewer headaches.');
-  await expect(page.getByRole('link', { name: /Explore the repository/ })).toHaveCount(4);
+  await expect(page.getByRole('link', { name: /Explore the repository/ })).toHaveCount(5);
   await expect(page.getByRole('link', { name: /patrick.r.schaller@gmail.com/ })).toHaveAttribute('href', 'mailto:patrick.r.schaller@gmail.com');
   await page.getByRole('link', { name: 'The work' }).click();
   await page.getByText('What’s worth a closer look?', { exact: true }).first().click();
@@ -50,7 +50,7 @@ test('the introduction, projects and email work without JavaScript', async ({ br
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:5100/');
   await expect(page.getByRole('button', { name: /Untangle it/ })).toBeHidden();
-  await expect(page.getByRole('link', { name: /Explore the repository/ })).toHaveCount(4);
+  await expect(page.getByRole('link', { name: /Explore the repository/ })).toHaveCount(5);
   await page.getByRole('link', { name: /Say hello/ }).click();
   await expect(page.getByRole('link', { name: /patrick.r.schaller@gmail.com/ })).toHaveAttribute('href', 'mailto:patrick.r.schaller@gmail.com');
   await context.close();
