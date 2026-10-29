@@ -1,0 +1,13 @@
+{
+  "name": "patrickschaller-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "check": "node tools/check-site.mjs",
+    "test": "playwright test",
+    "screenshots": "node tools/capture-screenshots.mjs"
+  },
+  "devDependencies": { "@playwright/test": "1.64.1" }
+}
